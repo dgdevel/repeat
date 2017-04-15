@@ -1,0 +1,16 @@
+<!-- the variable will be emitted as is -->
+Hello <%= params.get("name") %>
+
+<!-- the variable will be xml-escaped -->
+Hello <%- params.get("name") %>
+
+<!-- java source -->
+<% for (int i = 1; i <= 3; i++) { %>
+
+    <!-- param object -->
+    <% params.put("master.param", "" + i) %>
+
+    <!-- include sub-templates -->
+    <%< child param=master.param %>
+
+<% } %>

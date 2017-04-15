@@ -1,0 +1,13 @@
+<!-- the variable will be xml-escaped -->
+Hello {{ name }}
+
+<!-- the variable will be emitted as is -->
+Hello {{{ name }}}
+
+<!-- java source -->
+{{# for (int i = 1; i <= 3; i++) { }}
+
+	<!-- include sub-templates -->
+	{{> child param=name }}
+
+{{# } }}
