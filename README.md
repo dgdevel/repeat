@@ -38,6 +38,8 @@ In the `dgdevel.repeat.predef.resolvers` can be found some useful `Resolver` imp
 
 Under the `dgdevel.repeat.predef.tokenhandlers` package there are some useful implementation, to be used to extend the syntax.
 
+Due to the parser simplicity they are evaluated in the order in which they appears, using only the prefix string. If an ambiguity arise the longest match takes precedence. For example defining both `<% .. %>` and `<%= .. %>` will match the latter. Then it will proceed on finding the closing tag, and if found it will call the `accept` method passing the content string; if it fails to accept a `ParseException` will be thrown.
+
 ### Presets
 
 Two presets can be found under the `dgdevel.repeat.predef.syntax` package: a jsp like syntax and a mustache like syntax. See examples for usage.
