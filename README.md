@@ -42,7 +42,100 @@ Due to the parser simplicity they are evaluated in the order in which they appea
 
 ### Presets
 
-Two presets can be found under the `dgdevel.repeat.predef.syntax` package: a jsp like syntax and a mustache like syntax. See examples for usage.
+Two presets can be found under the `dgdevel.repeat.predef.syntax` package: a jsp like syntax and a mustache like syntax.
 
-### Examples
-Under the examples directory more extensive examples can be found.
+#### Jsp like syntax
+
+Example source in jsp like syntax:
+```
+<!-- the variable will be emitted as is -->
+Hello <%= params.get("name") %>
+
+<!-- the variable will be xml-escaped -->
+Hello <%- params.get("name") %>
+
+<!-- java source -->
+<% for (int i = 1; i <= 3; i++) { %>
+
+    <!-- param object -->
+    <% params.put("master.param", "" + i) %>
+
+    <!-- include sub-templates -->
+    <%< child param=master.param %>
+
+<% } %>
+```
+
+And the code to run the example:
+
+```
+Resolver resolver = new ClassLoaderResolver(
+	// a classloader can be passed, if null
+	// the context class loader will be used
+	Thread.currentThread().getContextClassLoader(),
+	// the base package to search for templates
+	"dgdevel.repeat.examples.jsplike",
+	// the template extension
+	"template",
+	// the file charset
+	Charset.forName("UTF-8")
+);
+// get a predefined context, with loaded syntax
+Context context = JspLike.getExtendedContext(resolver);
+// get or compile the named template
+Template template = context.get("master");
+// run the template
+Map<String, Object> params = new HashMap<String, Object>();
+params.put("name", "earth & moon");
+StringBuilder out = new StringBuilder();
+template.run(params, out);
+// resulting output
+System.out.println(out);
+```
+
+#### Mustache like syntax
+
+Example source in mustache like syntax:
+
+```
+<!-- the variable will be xml-escaped -->
+Hello {{ name }}
+
+<!-- the variable will be emitted as is -->
+Hello {{{ name }}}
+
+<!-- java source -->
+{{# for (int i = 1; i <= 3; i++) { }}
+
+	<!-- include sub-templates -->
+	{{> child param=name }}
+
+{{# } }}
+```
+
+And the code to run the example:
+
+```
+Resolver resolver = new ClassLoaderResolver(
+	// a classloader can be passed, if null
+	// the context class loader will be used
+	Thread.currentThread().getContextClassLoader(),
+	// the base package to search for templates
+	"dgdevel.repeat.examples.mustachelike",
+	// the template extension
+	"template",
+	// the file charset
+	Charset.forName("UTF-8")
+);
+// get a predefined context, with loaded syntax
+Context context = MustacheLike.getExtendedContext(resolver);
+// get or compile the named template
+Template template = context.get("master");
+// run the template
+Map<String, Object> params = new HashMap<String, Object>();
+params.put("name", "earth & moon");
+StringBuilder out = new StringBuilder();
+template.run(params, out);
+// resulting output
+System.out.println(out);
+```
