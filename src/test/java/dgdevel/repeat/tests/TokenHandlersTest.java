@@ -123,4 +123,16 @@ public class TokenHandlersTest extends TestCase {
 		.run(params, out);
 		assertEquals("myParam param", out.toString());
 	}
+
+	public void testEdgeCases() throws TemplateExecutionException, ResolveException, ParseException, CompilerException {
+		StringBuilder out = new StringBuilder();
+		new DefaultContext().handlers(
+			new OutputEscaped("<%", "%>"),
+			new OutputRaw("<%=", "%>")
+		).resolver(
+				new StringResolver("test", "<%= '&' %>")
+		).get("test")
+			.run(null, out);
+		assertEquals("&", out.toString());
+	}
 }

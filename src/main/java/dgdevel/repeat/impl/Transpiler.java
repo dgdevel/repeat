@@ -36,6 +36,10 @@ public class Transpiler {
 						if (p < min) {
 							min = p;
 							selected = handler;
+						} else if (p == min) {
+							if (selected.prefix().length() < handler.prefix().length()) {
+								selected = handler;
+							}
 						}
 					}
 				}
