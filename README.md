@@ -139,3 +139,7 @@ template.run(params, out);
 // resulting output
 System.out.println(out);
 ```
+
+## License
+
+`repeat` is released under the terms of GNU Lesser General Public License.
