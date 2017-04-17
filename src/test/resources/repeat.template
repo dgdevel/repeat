@@ -1,0 +1,34 @@
+<getp String include include>
+<eq include "yes" >
+	included!
+	<java>
+		return;
+	</java>
+<end>
+
+<getp dgdevel.repeat.tests.RepeatLangTest.User[] users usersArray>
+
+<loopa dgdevel.repeat.tests.RepeatLangTest.User user index users >
+	<if user.getName() != null >
+		<eq user.getName() "john">
+			User name is john.
+		<else>
+			<declare String name user.getName() >
+			<print name >
+			<print unsafe name >
+			<setp name name >
+		<end>
+	<end>
+<end>
+
+<setp users java.util.Arrays.asList(users) >
+
+<loopc dgdevel.repeat.tests.RepeatLangTest.User user index (java.util.Collection)params.get("users") >
+	<print index >
+<end>
+
+<setp include "yes" >
+
+<include repeat include=include >
+
+<includex repeat include=params.get("include") >

@@ -19,6 +19,8 @@ public interface Context {
 
 	public Context resolver(Resolver resolver);
 
+	public Context resolvers(Resolver...resolvers);
+
 	public List<TokenHandler> handlers();
 
 	public Context handlers(TokenHandler...handlers);

@@ -2,14 +2,18 @@ package dgdevel.repeat.tests;
 
 import java.nio.charset.Charset;
 
+import junit.framework.TestCase;
 import dgdevel.repeat.impl.DefaultContext;
 import dgdevel.repeat.predef.resolvers.CascadeResolver;
 import dgdevel.repeat.predef.resolvers.ClassLoaderResolver;
 import dgdevel.repeat.predef.resolvers.DirectoryResolver;
 import dgdevel.repeat.predef.resolvers.StringResolver;
-import junit.framework.TestCase;
 
 public class ResolversTest extends TestCase {
+
+	public ResolversTest() {
+		Log.conf();
+	}
 
 	public void testStringResolver() throws Exception {
 		new DefaultContext()

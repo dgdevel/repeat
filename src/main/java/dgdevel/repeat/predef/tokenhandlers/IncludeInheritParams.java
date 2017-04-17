@@ -19,13 +19,13 @@ import dgdevel.repeat.impl.textutils.Strings;
 public class IncludeInheritParams implements TokenHandler {
 
 	@Getter
-	private String prefix, suffix;
+	protected String prefix, suffix;
 
-	private Context context;
+	protected Context context;
 
-	private static Pattern detailPattern = Pattern.compile("^([^=]+)(=([^=]+))$");
+	protected static Pattern detailPattern = Pattern.compile("^([^=]+)(=([^=]+))$");
 
-	private static String[] cleanupParts(String[] input) {
+	protected static String[] cleanupParts(String[] input) {
 		int counter = 0;
 		for (String s : input) {
 			if (!s.isEmpty()) {

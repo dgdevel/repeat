@@ -13,14 +13,19 @@ import dgdevel.repeat.impl.textutils.Strings;
 public class OutputEscaped implements TokenHandler {
 
 	@Getter
-	private String prefix, suffix;
+	protected String prefix, suffix;
 
 	public boolean accept(String content) throws MissingDependenciesException {
 		return true;
 	}
 
 	public String transform(String content, OutputType outputType) {
-		return Strings.class.getName() + ".xmlsafe(" + content + ", out);\n";
-		
+		switch (outputType) {
+		case JAVA_LANG_STRINGBUILDER:
+			return Strings.class.getName() + ".xmlsafe(" + content + ", out);\n";
+		case JAVA_IO_WRITER:
+			return Strings.class.getName() + ".xmlsafe(\"\"+" + content + ", out);\n";
+		}
+		throw new IllegalArgumentException("Unsupported output type: "+outputType);
 	}
 }

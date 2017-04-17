@@ -74,6 +74,17 @@ public class Strings {
 		}
 	}
 
+	public static void xmlsafe(boolean b, StringBuilder out) { out.append(b); }
+	public static void xmlsafe(byte b, StringBuilder out) { out.append(b); }
+	public static void xmlsafe(short s, StringBuilder out) { out.append(s); }
+	public static void xmlsafe(int i, StringBuilder out) { out.append(i); }
+	public static void xmlsafe(long l, StringBuilder out) { out.append(l); }
+	public static void xmlsafe(float f, StringBuilder out) { out.append(f); }
+	public static void xmlsafe(double d, StringBuilder out) { out.append(d); }
+	public static void xmlsafe(char c, StringBuilder out) throws Exception {
+		xmlsafe(new StringBuilder().append(c), out);
+	}
+
 	public static void xmlsafe(Object o, Writer out) throws Exception {
 		if (o == null) {
 			xmlsafe("null", out);

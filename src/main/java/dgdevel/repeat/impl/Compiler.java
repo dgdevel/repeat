@@ -42,7 +42,7 @@ public class Compiler {
 		Template template = null;
 		while (!queue.isEmpty()) {
 			String name = queue.poll();
-			log.trace("---- Compiler.compile ----" + name);
+			log.trace("---- Compiler.compile: " + name);
 			CtClass ctClass = null;
 			String templateSource = context.resolver().resolve(name);
 			if (!stubs.containsKey(name)) {

@@ -13,7 +13,6 @@ import dgdevel.repeat.api.exceptions.ParseException;
 import dgdevel.repeat.api.exceptions.ResolveException;
 import dgdevel.repeat.api.exceptions.TemplateExecutionException;
 import dgdevel.repeat.impl.DefaultContext;
-import dgdevel.repeat.predef.resolvers.CascadeResolver;
 import dgdevel.repeat.predef.resolvers.StringResolver;
 import dgdevel.repeat.predef.tokenhandlers.Include;
 import dgdevel.repeat.predef.tokenhandlers.IncludeInheritParams;
@@ -24,6 +23,10 @@ import dgdevel.repeat.predef.tokenhandlers.OutputRaw;
 import dgdevel.repeat.predef.tokenhandlers.OutputRawParam;
 
 public class TokenHandlersTest extends TestCase {
+
+	public TokenHandlersTest() {
+		Log.conf();
+	}
 
 	public void testOutputHandlers() throws ResolveException, ParseException, CompilerException, TemplateExecutionException {
 		Context context = new DefaultContext();
@@ -114,11 +117,9 @@ public class TokenHandlersTest extends TestCase {
 			new OutputRawParam("<raw>", "</raw>"),
 			new Include("<include>", "</include>", context),
 			new IncludeInheritParams("<include-inherit>", "</include-inherit>", context))
-		.resolver(
-			new CascadeResolver(
-				new StringResolver("child", "<raw> param </raw>"),
-				new StringResolver("parent", "<include> child param=myParam </include> <include-inherit> child </include-inherit>")
-			)
+		.resolvers(
+			new StringResolver("child", "<raw> param </raw>"),
+			new StringResolver("parent", "<include> child param=myParam </include> <include-inherit> child </include-inherit>")
 		).get("parent")
 		.run(params, out);
 		assertEquals("myParam param", out.toString());

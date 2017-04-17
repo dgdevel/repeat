@@ -15,6 +15,7 @@ import dgdevel.repeat.api.TokenHandler;
 import dgdevel.repeat.api.exceptions.CompilerException;
 import dgdevel.repeat.api.exceptions.ParseException;
 import dgdevel.repeat.api.exceptions.ResolveException;
+import dgdevel.repeat.predef.resolvers.CascadeResolver;
 
 @Accessors(fluent=true)
 public class DefaultContext implements Context {
@@ -40,6 +41,10 @@ public class DefaultContext implements Context {
 	@Getter
 	@Setter
 	private Resolver resolver;
+
+	public Context resolvers(Resolver... resolvers) {
+		return resolver(new CascadeResolver(resolvers));
+	}
 
 	private Map<String, String> generatedClassNames = new HashMap<String, String>();
 

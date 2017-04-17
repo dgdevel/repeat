@@ -12,6 +12,8 @@ import dgdevel.repeat.api.exceptions.ParseException;
 public class Transpiler {
 
 	public static String javaSource(String input, List<TokenHandler> handlers, OutputType outputType) throws ParseException, MissingDependenciesException {
+		log.debug("---- Transpiler.javaSource INPUT ----");
+		log.debug(input);
 		TokenHandler current = null;
 		StaticTextTokenHandler staticTextHandler = new StaticTextTokenHandler();
 		int p;
@@ -45,12 +47,17 @@ public class Transpiler {
 				}
 				p = min;
 				if (p != 0 && p != Integer.MAX_VALUE) {
-					output.append(staticTextHandler.transform(input.substring(0, p), outputType));
+					String tokenText = input.substring(0, p);
+					log.trace("Token type: static text");
+					log.trace(tokenText);
+					output.append(staticTextHandler.transform(tokenText, outputType));
 					input = input.substring(p);
 				}
 				current = selected;
 				// no handler triggered: static text to the end
 				if (current == null) {
+					log.trace("Token type: static text");
+					log.trace(input);
 					output.append(staticTextHandler.transform(input, outputType));
 					input = "";
 				}
@@ -60,7 +67,12 @@ public class Transpiler {
 					if (!current.accept(content)) {
 						throw new ParseException("Invalid syntax of type " + current, input);
 					}
-					output.append(current.transform(content, outputType));
+					log.trace("Token type: " + current.getClass());
+					log.trace(content);
+					String transformedText = current.transform(content, outputType);
+					log.trace("Transformed text");
+					log.trace(transformedText);
+					output.append(transformedText);
 					input = input.substring(p + current.suffix().length());
 					current = null;
 				} else {
@@ -69,8 +81,8 @@ public class Transpiler {
 			}
 		}
 		output.append("}");
-		log.trace("---- Transpiler.javaSource ----");
-		log.trace(output);
+		log.debug("---- Transpiler.javaSource OUTPUT ----");
+		log.debug(output);
 		return output.toString();
 	}
 

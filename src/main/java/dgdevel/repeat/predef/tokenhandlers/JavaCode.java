@@ -12,7 +12,7 @@ import dgdevel.repeat.api.exceptions.MissingDependenciesException;
 public class JavaCode implements TokenHandler {
 
 	@Getter
-	private String prefix, suffix;
+	protected String prefix, suffix;
 
 	public boolean accept(String content) throws MissingDependenciesException {
 		return true;

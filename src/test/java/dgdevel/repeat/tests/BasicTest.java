@@ -9,6 +9,10 @@ import dgdevel.repeat.predef.resolvers.StringResolver;
 
 public class BasicTest extends TestCase {
 
+	public BasicTest() {
+		Log.conf();
+	}
+
 	public void testCharacterHandling() throws Exception {
 		StringBuilder _out = new StringBuilder();
 		for (int i = 32; i < 127; i++) {

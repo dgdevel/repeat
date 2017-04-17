@@ -13,7 +13,7 @@ import dgdevel.repeat.impl.textutils.Strings;
 public class OutputEscapedParam implements TokenHandler {
 
 	@Getter
-	private String prefix, suffix;
+	protected String prefix, suffix;
 
 	public boolean accept(String content) throws MissingDependenciesException {
 		return true;
