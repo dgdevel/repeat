@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 import lombok.AllArgsConstructor;
-import lombok.Cleanup;
 import dgdevel.repeat.api.Resolver;
 import dgdevel.repeat.api.exceptions.ResolveException;
 
@@ -18,9 +17,10 @@ public class DirectoryResolver implements Resolver {
 	private Charset charset;
 
 	public String resolve(String name) throws ResolveException {
+		FileInputStream in = null;
 		try {
 			String filepath = base + File.separator + name + "." + extension;
-			@Cleanup FileInputStream in = new FileInputStream(filepath);
+			in = new FileInputStream(filepath);
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			int len;
 			byte[] buffer = new byte[4096];
@@ -30,6 +30,12 @@ public class DirectoryResolver implements Resolver {
 			return new String(out.toByteArray(), charset);
 		} catch (IOException e) {
 			throw new ResolveException(e);
+		} finally {
+			try {
+				if (in != null) in.close();
+			} catch (IOException e) {
+				// we already had an exception or we completely read the file
+			}
 		}
 	}
 }

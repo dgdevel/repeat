@@ -23,7 +23,7 @@ public class Include implements TokenHandler {
 
 	protected Context context;
 
-	protected static Pattern detailPattern = Pattern.compile("^([^=]+)(=([^=]+))$");
+	protected static final Pattern detailPattern = Pattern.compile("^([^=]+)(=([^=]+))$");
 
 	protected static String[] cleanupParts(String[] input) {
 		int counter = 0;
