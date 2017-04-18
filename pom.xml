@@ -93,4 +93,11 @@
 		<url>http://github.com/dgdevel/repeat/tree/master</url>
 	</scm>
 
+	<developers>
+		<developer>
+			<name>Daniele Guttuso</name>
+			<email>daniele.guttuso@protonmail.com</email>
+		</developer>
+	</developers>
+
 </project>
