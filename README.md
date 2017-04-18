@@ -2,13 +2,19 @@
 
 `repeat` is a java templating library that aims to be fast, reliable, lightweight, extensible.
 
-## Download and dependecies
+## Download and dependencies
 
 The only two runtime dependencies are `javassist` and `log4j`; building will require also `project lombok` and `junit`.
 
 The build is done with the `maven` utility.
 
-A prebuilt jar can be found under the `releases` section.
+```
+<dependency>
+	<groupId>com.github.dgdevel</groupId>
+	<artifactId>repeat</artifactId>
+	<version>0.1.3</version>
+</dependency>
+```
 
 ## Project overview
 
