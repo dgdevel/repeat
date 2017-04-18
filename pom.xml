@@ -60,4 +60,11 @@
 		</dependency>
 
 	</dependencies>
+
+	<scm>
+		<connection>scm:git:git://github.com/dgdevel/repeat.git</connection>
+		<developerConnection>scm:git:ssh://github.com:dgdevel/repeat.git</developerConnection>
+		<url>http://github.com/dgdevel/repeat/tree/master</url>
+	</scm>
+
 </project>
