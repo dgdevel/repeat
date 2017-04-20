@@ -1,5 +1,6 @@
 package dgdevel.repeat.impl.textutils;
 
+import java.io.IOException;
 import java.io.Writer;
 import java.util.UUID;
 
@@ -56,7 +57,7 @@ public class Strings {
 		return src.toString();
 	}
 
-	public static void xmlsafe(Object o, StringBuilder out) throws Exception {
+	public static void xmlsafe(Object o, StringBuilder out) {
 		if (o == null) {
 			xmlsafe("null", out);
 			return;
@@ -81,11 +82,11 @@ public class Strings {
 	public static void xmlsafe(long l, StringBuilder out) { out.append(l); }
 	public static void xmlsafe(float f, StringBuilder out) { out.append(f); }
 	public static void xmlsafe(double d, StringBuilder out) { out.append(d); }
-	public static void xmlsafe(char c, StringBuilder out) throws Exception {
+	public static void xmlsafe(char c, StringBuilder out) {
 		xmlsafe(""+c, out);
 	}
 
-	public static void xmlsafe(Object o, Writer out) throws Exception {
+	public static void xmlsafe(Object o, Writer out) throws IOException {
 		if (o == null) {
 			xmlsafe("null", out);
 			return;
@@ -103,5 +104,16 @@ public class Strings {
 		   }
 		}
 		out.append(sb);
+	}
+
+	public static void xmlsafe(boolean b, Writer out) throws IOException { out.append(""+b); }
+	public static void xmlsafe(byte b, Writer out) throws IOException { out.append(""+b); }
+	public static void xmlsafe(short s, Writer out) throws IOException { out.append(""+s); }
+	public static void xmlsafe(int i, Writer out) throws IOException { out.append(""+i); }
+	public static void xmlsafe(long l, Writer out) throws IOException { out.append(""+l); }
+	public static void xmlsafe(float f, Writer out) throws IOException { out.append(""+f); }
+	public static void xmlsafe(double d, Writer out) throws IOException { out.append(""+d); }
+	public static void xmlsafe(char c, Writer out) throws IOException {
+		xmlsafe(""+c, out);
 	}
 }

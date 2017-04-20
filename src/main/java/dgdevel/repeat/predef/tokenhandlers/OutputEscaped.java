@@ -22,9 +22,8 @@ public class OutputEscaped implements TokenHandler {
 	public String transform(String content, OutputType outputType) {
 		switch (outputType) {
 		case JAVA_LANG_STRINGBUILDER:
-			return Strings.class.getName() + ".xmlsafe(" + content + ", out);\n";
 		case JAVA_IO_WRITER:
-			return Strings.class.getName() + ".xmlsafe(\"\"+" + content + ", out);\n";
+			return Strings.class.getName() + ".xmlsafe(" + content + ", out);\n";
 		}
 		throw new IllegalArgumentException("Unsupported output type: "+outputType);
 	}
