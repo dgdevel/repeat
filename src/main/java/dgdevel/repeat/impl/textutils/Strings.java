@@ -93,13 +93,15 @@ public class Strings {
 		String input = o.toString();
 		int length = input.length();
 		int c;
+		StringBuilder sb = new StringBuilder((int) (input.length() * 1.2));
 		for (int i = 0; i < length; i += Character.charCount(c)) {
 		   c = input.codePointAt(i);
 		   if (c < 32 || c > 126 || c == '&' || c == '<' || c == '>' || c == '\'' || c == '"') {
-			   out.append(String.format("&#x%x;", c));
+			   sb.append(String.format("&#x%x;", c));
 		   } else {
-			   out.append((char)c);
+			   sb.append((char)c);
 		   }
 		}
+		out.append(sb);
 	}
 }
