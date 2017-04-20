@@ -82,7 +82,7 @@ public class Strings {
 	public static void xmlsafe(float f, StringBuilder out) { out.append(f); }
 	public static void xmlsafe(double d, StringBuilder out) { out.append(d); }
 	public static void xmlsafe(char c, StringBuilder out) throws Exception {
-		xmlsafe(new StringBuilder().append(c), out);
+		xmlsafe(""+c, out);
 	}
 
 	public static void xmlsafe(Object o, Writer out) throws Exception {
