@@ -6,15 +6,9 @@
 
 The only two runtime dependencies are `javassist` and `log4j`; building will require also `project lombok` and `junit`.
 
-The build is done with the `maven` utility.
+The build is done with the `maven` utility. Latest releases can be found here (both maven dependency and jars):
 
-```
-<dependency>
-	<groupId>com.github.dgdevel</groupId>
-	<artifactId>repeat</artifactId>
-	<version>0.1.3</version>
-</dependency>
-```
+https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.github.dgdevel%22
 
 ## Project overview
 
